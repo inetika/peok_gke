@@ -1,0 +1,33 @@
+apiVersion: v2
+appVersion: v1.0.0
+dependencies:
+- condition: install.infrastructure
+  name: redis
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 17.11.3
+- condition: install.infrastructure
+  name: postgresql
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 12.5.7
+- condition: install.infrastructure
+  name: kafka
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 22.1.5
+description: A Helm chart for the Conference App
+home: http://github.com/salaboy/platforms-on-k8s
+icon: https://www.salaboy.com/content/images/2023/06/avatar-new.png
+keywords:
+- cloudnative
+- platform-engineering
+- platforms
+- book
+- kubernetes
+- tutorial
+- example
+maintainers:
+- email: salaboy@gmail.com
+  name: salaboy
+  url: http://salaboy.com
+name: conference-app
+type: application
+version: v1.0.0

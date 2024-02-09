@@ -1,0 +1,29 @@
+{{- if ne .Values.url "" }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Chart.Name }}
+  annotations:
+    acme.cert-manager.io/http01-edit-in-place: 'true'  
+    cert-manager.io/issuer: "{{ .Chart.Name }}-issuer"
+    # nginx.ingress.kubernetes.io/force-ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - {{ .Chart.Name }}.{{ .Values.url }}
+    secretName: {{ .Chart.Name }}-tls
+  rules:
+  - host: {{ .Chart.Name }}.{{ .Values.url }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Chart.Name }}
+            port:
+              number: 80
+{{- end }}
